@@ -72,12 +72,24 @@ WSGI_APPLICATION = 'quizrush.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv() 
+
+# db config from .env file
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),  # Your database name
+        'USER': os.getenv('DB_USER'),  # Your PostgreSQL username
+        'PASSWORD': os.getenv('DB_PASSWORD'),  # Your PostgreSQL password
+        'HOST': os.getenv('DB_HOST', 'localhost'),  # Set to your DB host, usually 'localhost'
+        'PORT': os.getenv('DB_PORT', '5432'),  # Default PostgreSQL port
     }
 }
+
 
 
 # Password validation
