@@ -4,13 +4,14 @@ from django.contrib.auth.models import User
 from question.models import Question, Choices
 from game.models import GameSession
 
+
 class AnswerLog(models.Model):
     session = models.ForeignKey('game.GameSession', related_name='answer_logs', on_delete=models.CASCADE)
     question = models.ForeignKey('question.Question', related_name='answer_logs', on_delete=models.CASCADE)
-    player = models.Foreignkey('users.User', related_name='answer_logs', on_delete=models.CASCADE)
+    player = models.ForeignKey('users.User', related_name='answer_logs', on_delete=models.CASCADE)
     answer = models.ForeignKey('question.Choices', related_name='answer_logs', on_delete=models.CASCADE)
     is_correct = models.BooleanField(default=False)
-    answered_at = models.DateTimeField(default=models.timezone.now)
+    answered_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = 'answer_logs'

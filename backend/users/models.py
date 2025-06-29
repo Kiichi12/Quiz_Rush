@@ -19,7 +19,7 @@ class User (AbstractUser):
         db_table = 'users'  
 
 class Friends(models.Model):
-    user = models.fromoreignKey(User, related_name='friends', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='friends', on_delete=models.CASCADE)
     friend = models.ForeignKey(User, related_name='friend_of', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
